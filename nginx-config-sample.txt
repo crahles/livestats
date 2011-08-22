@@ -1,0 +1,24 @@
+upstream node_server {
+  server 127.0.0.1:8000;
+}
+
+server {
+  listen       80;
+  server_name  example.com;
+  root         /var/www/apps/example.com/current/public;
+  index        index.html;
+
+  try_files  $uri/index.html $uri.html $uri @node_server;
+
+  location @node_server {
+    proxy_set_header  X-Real-IP        $remote_addr;
+    proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;
+    proxy_set_header  Host             $http_host;
+    proxy_redirect    false;
+    proxy_pass        http://node_server;
+  }
+  error_page   500 502 503 504  /50x.html;
+  location = /50x.html {
+    root   html;
+  }
+}
