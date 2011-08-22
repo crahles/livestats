@@ -11,7 +11,7 @@ function LiveStatsClient() {
     self.viewDidResize();
     self.setupBayeuxHandlers();
   };
-  
+
   this.setupBayeuxHandlers = function() {
     $.getJSON("/config.json", function (config) {
       self.client = new Faye.Client("http://" + window.location.hostname + ':' + config.port + '/ws', {
@@ -29,7 +29,7 @@ function LiveStatsClient() {
     var width = $('body').width(),
         windowHeight = $(window).height(),
         mapCanvasHeight = width * (369.0 / 567.0);
-        
+
     self.map.setSize(width, mapCanvasHeight);
     $('#map').css({
       'margin-top': (windowHeight - mapCanvasHeight) / 2.0
@@ -96,9 +96,8 @@ function LiveStatsClient() {
     var title = self.map.text(x, y + 11, text);
     title.attr({
       fill: 'white',
-      "font-size": 10,
-      "font-family": "'Helvetica Neue', 'Helvetica', sans-serif",
-      'font-weight': 'bold'
+      "font-size": 5,
+      "font-family": "'Helvetica Neue', 'Helvetica', sans-serif"
     });
     var subtitle = self.map.text(x, y + 21, city);
     subtitle.attr({
@@ -125,19 +124,19 @@ function LiveStatsClient() {
 
     person.animate({
       scale: '0.02, 0.02'
-    }, 2000, 'elastic', function () {
+    }, 5000, 'elastic', function () {
       $(title.node).fadeOut(5000);
       $(subtitle.node).fadeOut(5000);
     });
   }
-  
+
   this.init();
 };
 
 var liveStatsClient;
 jQuery(function() {
   liveStatsClient = new LiveStatsClient();
-  
+
   $(window).resize(function() {
     liveStatsClient.viewDidResize();
   });
