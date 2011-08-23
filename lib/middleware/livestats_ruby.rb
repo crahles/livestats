@@ -17,7 +17,10 @@ module Rack
         livestats_server = 'localhost'
         livestats_port = '8000'
 
-        Net::HTTP.get(livestats_server, "/stat?ip=#{remote_ip}&title=#{request_uri}", livestats_port) if ((headers["Content-Type"] =~ /text\/html|application\/xhtml\+xml/) && status == 200)
+
+        if ((headers["Content-Type"] =~ /text\/html|application\/xhtml\+xml/) && status == 200)
+          Net::HTTP.get(livestats_server, "/stat?ip=#{remote_ip}&title=#{request_uri}", livestats_port)
+        end
       rescue
       end
 
