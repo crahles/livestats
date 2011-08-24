@@ -18,6 +18,7 @@ var LiveStats = require('./lib/livestats');
 
 new LiveStats({
   port: 8000,
+  publicDir: './public',
   geoipServer: {
       hostname: 'localhost'
     , port: 3000
