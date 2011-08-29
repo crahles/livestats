@@ -14,7 +14,7 @@ function LiveStatsClient() {
 
   this.setupBayeuxHandlers = function() {
     $.getJSON("/config.json", function (config) {
-      self.client = new Faye.Client("http://" + window.location.hostname + ':' + config.port + '/ws', {
+      self.client = new Faye.Client("http://" + config.hostname + ':' + config.port + '/ws', {
         timeout: 120
       });
 

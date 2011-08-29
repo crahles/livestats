@@ -17,6 +17,7 @@ process.addListener('uncaughtException', function (err, stack) {
 var LiveStats = require('./lib/livestats');
 
 new LiveStats({
+  hostname: 'localhost',
   port: 8000,
   publicDir: './public',
   geoipServer: {
